@@ -61,8 +61,8 @@ public class CharGenerator implements Generator{
 		for(int i = 0; i<l;i++)
 			val0 += bchars[new Random().nextInt(bchars.length)];
 		if(like != null)
-			return '"'+new CharLikeParser(val0, like).build()+'"';
-		return '"'+val0+'"';
+			return "'"+new CharLikeParser(val0, like).build()+"'";
+		return "'"+val0+"'";
 	}
 
 }

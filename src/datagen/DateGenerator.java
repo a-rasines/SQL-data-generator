@@ -73,7 +73,7 @@ public class DateGenerator implements Generator{
 		this.like = new DateLikeParser(like);
 		return this;
 	}
-	SimpleDateFormat ret = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+	SimpleDateFormat ret = new SimpleDateFormat("yyyy-MM-dd");
 	public String build() {
 		if(eq != null) {
 			return ret.format(eq);
@@ -90,7 +90,7 @@ public class DateGenerator implements Generator{
 			date.set(Calendar.MINUTE, like.getValueFrom(Calendar.MINUTE, date.get(Calendar.MINUTE)));
 			date.set(Calendar.SECOND, like.getValueFrom(Calendar.SECOND, date.get(Calendar.SECOND)));
 		}
-		return ret.format(date.getTime());
+		return "'"+ret.format(date.getTime())+"'";
 	}
 	
 	public static boolean isDate(String s) {
@@ -98,22 +98,14 @@ public class DateGenerator implements Generator{
 	}
 	public static Date dateParser(String date) {
 		String[] formats = {
-				"dd-MM-yyyy",
-				"MM-yyyy",
-				"dd-MM",
-				"yyyy", 
-				"dd-MM-yyyy HH:mm:ss", 
-				"dd-MM-yyyy HH:mm",
-				"dd-MM-yyyy HH", 
-				"MM-yyyy HH:mm:ss", 
-				"MM-yyyy HH:mm", 
-				"MM-yyyy HH", 
-				"yyyy HH:mm:ss", 
-				"yyyy HH:mm",
-				"yyyy HH"};
+				"yyyy-MM-dd",
+				"yyyy-MM",
+				"MM-dd",
+				"yyyy" 
+				};
 		for(String s : formats) {
 			try {
-				return new SimpleDateFormat("dd-MM-yyyy").parse(date);
+				return new SimpleDateFormat("yyyy-MM-dd").parse(date);
 			} catch (Exception e) {
 				continue;
 			}
